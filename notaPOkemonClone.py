@@ -44,13 +44,15 @@ def battleSetUp():
     choice = input("[1]Player vs Player          [2]Player vs Computer")
     if choice == "1":
         choice = input("")
-        player1 = playerSetUp()
+        player1 = playerSetUp("1")
 
-def playerSetUp():
+def playerSetUp(number):
     p = player()
     p._init_()
-    print("Player 1 Setup")
+    print("Player "+number +" Setup")
     p.nameSet(input("What name should your character have."))
     return p
+
+def battle():
 
 #okay
