@@ -242,21 +242,21 @@ def defeat(ai):
     pass
 def specialMove(player,ai,turn,wins):
     if ai.getSpeicalMove() == "Cuban Missle":
-        print(ai.getName()+" used " + ai.getSpeicalMove() + " their attack has been sharply boosted.")
+        print("*****"+ai.getName()+" used " + ai.getSpeicalMove() + " their attack has been sharply boosted.*****")
         ai.setAttack(2.5)
         player = accCheck(ai,player,move =ai.randomMove())
     elif ai.getSpeicalMove() == "Rewind":
-        print(ai.getName()+" used " + ai.getSpeicalMove() + " their attack has been boosted and time resets")
+        print("*****"+ ai.getName()+" used " + ai.getSpeicalMove() + " their attack has been boosted and time resets*****")
         ai.setAttack(1.5)
         turn =0
         player.healthSet(50)
         ai.healthSet(50)
     elif ai.getSpeicalMove() == "Rest":
-        print(ai.getName()+" used " + ai.getSpeicalMove() + " their health has been restored, but their attack was reduced")
+        print("*****"+ai.getName()+" used " + ai.getSpeicalMove() + " their health has been restored, but their attack was reduced*****")
         ai.setAttack(0.55)
         ai.healthSet(80)
     elif ai.getSpeicalMove() == "BP Special":
-        print(ai.getName()+" used " + ai.getSpeicalMove() + " it deals 14 damage to " + player.getName() +".")
+        print("*****"+ai.getName()+" used " + ai.getSpeicalMove() + " it deals 14 damage to " + player.getName() +".*****")
         player.healthSet(player.getHealth()-14)
     return player , ai, turn
 if __name__ == "__main__":
