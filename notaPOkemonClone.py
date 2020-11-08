@@ -83,7 +83,7 @@ def aiSetup():
         ai.healthSet(80)
         ai.setAttack(0.7)
         ai.setSpd(0.7)
-        moves = {"WOAH WOAH WOAH": 20, 
+        moves = {"WOAH WOAH WOAH": 14, 
         "I'm actually done dud": 8}
         ai.setMoves(moves)
     elif ai.name == "Reynel":
@@ -196,7 +196,7 @@ def attackStep(player,ai,move,turn):
 
 def damageCalc(player,move):
     damage = player.getAttack() * player.MoveSelect(move)
-    return damage
+    return round(damage)
 
 if __name__ == "__main__":
     battleSetUp()
