@@ -91,7 +91,6 @@ def playerSetUp():
 
 def aiSetup(name):
     ai = AI()
-    names = ["Defrim", "Reynel", "Ishaan", "Francis"]
     ai.nameManualSet(name)
     if ai.name == "Defrim":
         ai.healthSet(80)
@@ -153,7 +152,7 @@ def Choose_Moves():
 
     for x in Chosen_Moves: 
         if x in Preset_Moves:
-            player_chosen_moves[x] = int(Preset_Moves[x])
+            player_chosen_moves[x] = Preset_Moves[x]
     
     return player_chosen_moves
 
@@ -179,39 +178,42 @@ def battle(player, ai,turn):
 def attackStep(player,ai,move,turn):
     aimove = ai.randomMove()
     if player.getSpd() > ai.getSpd():
-        damage = damageCalc(player,move)
-        print("\n"+player.getName()+ " uses "+ move+ " and "+ ai.getName() + " takes " + str(damage) + " damage" )
-        ai.healthSet(ai.getHealth() - damage)
+        ai = accCheck(player,ai,move)
         if ai.getHealth() <= 0:
-            print(player.getName() + " wins the fight.")
+            victory(player)
         else:
-            damage = damageCalc(ai,aimove)
-            print("\n"+ai.getName()+ " uses "+ aimove+ " and "+ player.getName() + " takes " + str(damage) + " damage" )
-            player.healthSet(player.getHealth() - damage)
+            player = accCheck(ai,player,move =aimove)
             if player.getHealth() <= 0:
-                print(ai.getName() + " wins the fight.")
-                print("GAME OVER")
+                defeat(ai)
     else:
-        damage = damageCalc(ai,aimove)
-        print("\n"+ai.getName()+ " uses "+ aimove+ " and "+ player.getName() + " takes " + str(damage) + " damage" )
-        player.healthSet(player.getHealth() - damage)
-        
+        player = accCheck(ai,player,move =aimove)
         if player.getHealth() <= 0:
-            print(ai.getName() + " wins the fight.")
-            print("GAME OVER")
+            defeat(ai)
         else:
-            damage = damageCalc(player,move)
-            print("\n"+player.getName()+ " uses "+ move+ " and "+ ai.getName() + " takes " + str(damage) + " damage" )
-            ai.healthSet(ai.getHealth() - damage)
+            ai = accCheck(player,ai,move)
             if ai.getHealth() <= 0:
-                print(player.getName() + " wins the fight.")
+                victory(player)
     turn += 1
     battle(player,ai,turn)
 
 def damageCalc(player,move):
     damage = player.getAttack() * player.MoveSelect(move)
     return round(damage)
+def accCheck(player,ai,move):
+    chance = random.random()
+    if chance <= player.AccuracySelect(move):
+        damage = damageCalc(player,move)
+        print("\n"+player.getName()+ " uses "+ move+ " and "+ ai.getName() + " takes " + str(damage) + " damage" )
+        ai.healthSet(ai.getHealth() - damage)
+    else: 
+        print("\n"+player.getName()+ " uses "+ move+ " but it missed." )
+    return ai
+def victory(player):
+    print(player.getName() + " wins the fight.")
 
+def defeat(ai):
+    print(ai.getName() + " wins the fight.")
+    print("GAME OVER")
 if __name__ == "__main__":
     battleSetUp()
     
