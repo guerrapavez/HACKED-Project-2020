@@ -146,6 +146,8 @@ def Choose_Moves():
     while not set(Chosen_Moves).intersection(Preset_Moves.keys()):
         Chosen_Moves.append(str(input("Please choose your first move from the moves list above (CASE SENSITIVE):   ")))
         Chosen_Moves.append(str(input("Please choose your second and last move for the moves list above (CASE SENSITIVE):   ")))
+        if Chosen_Moves[0] not in Preset_Moves.keys() or Chosen_Moves[1] not in Preset_Moves.keys():
+            Chosen_Moves = []
     
     player_chosen_moves = {}
 
