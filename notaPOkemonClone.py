@@ -54,43 +54,41 @@ def playerSetUp(number):
     p.nameSet(input("What name should your character have."))
     return p
 
-<<<<<<< HEAD
 
 def Choose_Moves():
-    Preset_Moves = {"Hyper Beam" : 150,
-    "Fire Blast" : 110,
-    "Earthquake" : 100,
-    "Leaf Storm" : 130,
-    "Thunder Bolt" : 90,
-    "Close Combat" : 120,
-    "Psychic" : 90,
-    "Blizzard": 110,
-    "Bullet punch" : 40,
-    "Tackle" : 40,
-    "Hidden Power" : 60,
-    "Night Slash" : 70,
-    "Aerial Ace" : 60,
-    "WOAH WOAH WOAH" : 200
+    Preset_Moves = {"Hyper Beam" : 15,
+    "Fire Blast" : 11,
+    "Earthquake" : 10,
+    "Leaf Storm" : 13,
+    "Thunder Bolt" : 9,
+    "Close Combat" : 12,
+    "Psychic" : 9,
+    "Blizzard": 11,
+    "Bullet punch" : 4,
+    "Tackle" : 4,
+    "Hidden Power" : 6,
+    "Night Slash" : 7,
+    "Aerial Ace" : 6,
     } 
-    p = player() 
+    p = player()
     p._init_()
     
     print(Preset_Moves)
-    Chosen_Moves = list(map(str,input("Please choose 2 moves from this list").split()))
+    Chosen_Moves = []
+    
+    while not set(Chosen_Moves).intersection(Preset_Moves.keys()):
+        Chosen_Moves.append(str(input("Please choose your first move from the moves list above (CASE SENSITIVE):   ")))
+        Chosen_Moves.append(str(input("Please choose your second and last move for the moves list above (CASE SENSITIVE):   ")))
+    
     player_chosen_moves = {}
-
-
     for x in Chosen_Moves: 
         if x in Preset_Moves:
             player_chosen_moves[x] = Preset_Moves[x]
     
     p.setMoves(player_chosen_moves)
-    print(p.moves)
 if __name__ == "__main__":
     Choose_Moves()
     
-=======
 def battle():
 
-#okay
->>>>>>> 04891875f2a778b0e75f5c9bcb3ecd3a8b4757c5
+    pass
