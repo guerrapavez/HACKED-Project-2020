@@ -5,7 +5,8 @@ class player ():
         self.health = health
         self.speed = speed
         self.moves = moves 
-    
+        self.attack = 1
+
     def nameSet(self):
         name =""
         while name == "":
@@ -38,21 +39,36 @@ class player ():
         return self.moves[move] 
     def setMoves(self, moves):
         self.moves = moves
-
+    def setAttack(self, attack):
+        self.attack = attack
+    def getAttack(self):
+        return self.attack
 
     pass
-def battleSetUp():
-    choice = input("[1]Player vs Player          [2]Player vs Computer")
-    if choice == "1":
-        choice = input("")
-        player1 = playerSetUp("1")
+class ai(player):
+    def nameManualSet(self, name):
+        self.name = name
+    pass
+    
 
-def playerSetUp(number):
+def battleSetUp():
+        choice = input("")
+        player1 = playerSetUp()
+        AI = aiSetup()
+
+def playerSetUp():
     p = player()
     p._init_()
-    print("Player "+number +" Setup")
-    p.nameSet(input("What name should your character have."))
+    print("Player Setup")
+    p.nameSet()
     return p
+def aiSetup():
+    ai = ai()
+    names = ["Defrim", "Reynel", "Ishaan", "Francis"]
+    ai.nameManualSet(names[random.randrange(0, 3, 1)])
+    if ai.name == "Defrim":
+        ai.healthSet()
+    return ai
 
 
 def Choose_Moves():
@@ -89,6 +105,10 @@ def Choose_Moves():
 if __name__ == "__main__":
     Choose_Moves()
     
-def battle():
+def battle(player1, player2):
+
+    if player1.getSpd() > player2.getSpd()
+        print("Player 1 is f"
 
     pass
+#okay
