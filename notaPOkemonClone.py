@@ -73,7 +73,7 @@ def battleSetUp():
     wins = 0
     for i in range (len(names)):
         AI.append(aiSetup(names[i]))
-        print(AI[i].name +" challenges you to a fight.")
+        print("\n" + AI[i].name +" challenges you to a fight.")
         wins = battle(player,AI[i],1,wins)
         player.healthSet(50)
     losses = len(names) - wins
@@ -247,7 +247,7 @@ def specialMove(player,ai,turn,wins):
         player = accCheck(ai,player,move =ai.randomMove())
     elif ai.getSpeicalMove() == "Rewind":
         print("*****"+ ai.getName()+" used " + ai.getSpeicalMove() + " their attack has been boosted and time resets*****")
-        ai.setAttack(1.5)
+        ai.setAttack(ai.getAttack() +0.3)
         turn =0
         player.healthSet(50)
         ai.healthSet(50)
