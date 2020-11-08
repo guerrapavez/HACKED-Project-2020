@@ -65,7 +65,7 @@ class AI(player):
         self.special = special
         pass
     def getSpeicalMove(self):
-        return
+        return self.special
 def battleSetUp():
     AI = []
     player = playerSetUp()
@@ -98,6 +98,7 @@ def aiSetup(name):
         moves = {"WOAH WOAH WOAH": [14,.55], 
         "I'm actually done dud": [8,.75]}
         ai.setMoves(moves)
+        ai.specialMoveSet("Rest")
     elif ai.name == "Reynel":
         ai.healthSet(30)
         ai.setAttack(1.8)
@@ -105,6 +106,7 @@ def aiSetup(name):
         moves = {"Chancla Throw": [9,.86], 
         "Tight Hug": [7,.92]}
         ai.setMoves(moves)
+        ai.specialMoveSet("Cuban Missle")
     elif ai.name == "Francis":
         ai.healthSet(40)
         ai.setAttack(0.8)
@@ -112,6 +114,7 @@ def aiSetup(name):
         moves = {"Salmonela": [14,.50],
         "Monster Energy": [10,0.70]}
         ai.setMoves(moves)
+        ai.specialMoveSet("BP Special")
     elif ai.name == "Ishaan":
         ai.healthSet(50)
         ai.setAttack(1.2)
@@ -119,6 +122,7 @@ def aiSetup(name):
         moves ={"SquadW": [4,1.00],
         "Microsoft Paint": [6,1.00]}
         ai.setMoves(moves)
+        ai.specialMoveSet("Rewind")
     return ai
 
 
@@ -196,18 +200,24 @@ def attackStep(player,ai,move,turn,wins):
         ai = accCheck(player,ai,move)
         if ai.getHealth() <= 0:
            wins = victory(player,wins)
+        elif ai.getHealth() <10:
+            player, ai, turn = specialMove(player,ai,turn,wins)
         else:
             player = accCheck(ai,player,move =aimove)
-            if player.getHealth() <= 0:
-                defeat(ai)
+        if player.getHealth() <= 0:
+                defeat(ai)    
     else:
-        player = accCheck(ai,player,move =aimove)
+        if ai.getHealth() <10:
+            player, ai, turn = specialMove(player,ai,turn,wins)
+        else:
+            player = accCheck(ai,player,move =aimove)
         if player.getHealth() <= 0:
             defeat(ai)
         else:
             ai = accCheck(player,ai,move)
             if ai.getHealth() <= 0:
                 wins= victory(player,wins)
+            
     turn += 1
     wins =battle(player,ai,turn,wins)
     return wins
@@ -230,6 +240,25 @@ def victory(player,wins):
 def defeat(ai):
     print(ai.getName() + " wins the fight.")
     pass
+def specialMove(player,ai,turn,wins):
+    if ai.getSpeicalMove() == "Cuban Missle":
+        print(ai.getName()+" used " + ai.getSpeicalMove() + " their attack has been sharply boosted.")
+        ai.setAttack(2.5)
+        player = accCheck(ai,player,move =ai.randomMove())
+    elif ai.getSpeicalMove() == "Rewind":
+        print(ai.getName()+" used " + ai.getSpeicalMove() + " their attack has been boosted and time resets")
+        ai.setAttack(1.5)
+        turn =0
+        player.healthSet(50)
+        ai.healthSet(50)
+    elif ai.getSpeicalMove() == "Rest":
+        print(ai.getName()+" used " + ai.getSpeicalMove() + " their health has been restored, but their attack was reduced")
+        ai.setAttack(0.55)
+        ai.healthSet(80)
+    elif ai.getSpeicalMove() == "BP Special":
+        print(ai.getName()+" used " + ai.getSpeicalMove() + " it deals 14 damage to " + player.getName() +".")
+        player.healthSet(player.getHealth()-14)
+    return player , ai, turn
 if __name__ == "__main__":
     battleSetUp()
     
