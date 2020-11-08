@@ -35,7 +35,7 @@ class player ():
     def setSpd(self,speed):
         self.speed = speed
     def MoveSelect(self,move):
-        self.moves = moves
+        return self.moves[move] 
 
 if __name__ == "__main__":
     
