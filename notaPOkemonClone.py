@@ -43,6 +43,7 @@ def battleSetUp():
     if choice == "1":
         choice = input("")
         player1 = playerSetUp()
-    
+
 def playerSetUp():
-    
+    p = player()
+    p._init_()
