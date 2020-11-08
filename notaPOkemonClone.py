@@ -4,7 +4,7 @@ class player ():
         self.name = name
         self.health = health
         self.speed = speed
-        self.moves = moves
+        self.moves = moves 
     
     def nameSet(self):
         name =""
@@ -34,6 +34,8 @@ class player ():
 
     def setSpd(self,speed):
         self.speed = speed
+    def MoveSelect(self,move):
+        self.moves = moves
 
 if __name__ == "__main__":
     
@@ -48,5 +50,10 @@ def playerSetUp():
     p = player()
     p._init_()
     print("Player 1 Setup")
-    p.nameSet(input("What name should your character have."))
+    p.nameSet()
+    
     return p
+
+
+
+    
