@@ -63,9 +63,21 @@ class AI(player):
 
 def battleSetUp():
     player = playerSetUp()
-    ai = aiSetup()
+    ai = aiSetup("Francis")
     print(ai.name +" challenges you to a fight.")
     battle(player,ai,1)
+    player.healthSet(50)
+    ai2 = aiSetup("Ishaan")
+    print(ai2.name +" challenges you to a fight.")
+    battle(player,ai2,1)
+    player.healthSet(50)
+    ai3 = aiSetup("Reynel")
+    print(ai3.name +" challenges you to a fight.")
+    battle(player,ai3,1)
+    player.healthSet(50)
+    ai4 = aiSetup("Defrim")
+    print(ai4.name +" challenges you to a fight.")
+    battle(player,ai4,1)
 def playerSetUp():
     p = player()
     p._init_()
@@ -75,10 +87,10 @@ def playerSetUp():
     p.setMoves(moves)
     return p
 
-def aiSetup():
+def aiSetup(name):
     ai = AI()
     names = ["Defrim", "Reynel", "Ishaan", "Francis"]
-    ai.nameManualSet(names[random.randint(0,3)])
+    ai.nameManualSet(name)
     if ai.name == "Defrim":
         ai.healthSet(80)
         ai.setAttack(0.7)
@@ -143,7 +155,7 @@ def Choose_Moves():
     return player_chosen_moves
 
 def battle(player, ai,turn):
-    while ai.health >0 and player.health >0:
+    if ai.health >0 and player.health >0:
         loop = True
         while loop == True:
             health = round(player.getHealth())
@@ -159,6 +171,7 @@ def battle(player, ai,turn):
                 attackStep(player,ai,player.getMove2Name(),turn)
             else:
                 print("1 and 2 are the only valid inputs.")
+
     pass
 def attackStep(player,ai,move,turn):
     aimove = ai.randomMove()
@@ -168,7 +181,6 @@ def attackStep(player,ai,move,turn):
         ai.healthSet(ai.getHealth() - damage)
         if ai.getHealth() <= 0:
             print(player.getName() + " wins the fight.")
-            print("This is as far as the game goes")
         else:
             damage = damageCalc(ai,aimove)
             print("\n"+ai.getName()+ " uses "+ aimove+ " and "+ player.getName() + " takes " + str(damage) + " damage" )
@@ -190,7 +202,6 @@ def attackStep(player,ai,move,turn):
             ai.healthSet(ai.getHealth() - damage)
             if ai.getHealth() <= 0:
                 print(player.getName() + " wins the fight.")
-                print("This is as far as the game goes")
     turn += 1
     battle(player,ai,turn)
 
