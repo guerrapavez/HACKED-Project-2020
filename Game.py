@@ -65,7 +65,7 @@ class player ():
     def getHealth(self):
         return self.health
     
-# hello there stranger
+# hello there stranger hehehxd
 if __name__ == "__main__":
     p = player()
     p._init_()
