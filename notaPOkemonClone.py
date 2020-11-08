@@ -50,3 +50,5 @@ def playerSetUp():
     print("Player 1 Setup")
     p.nameSet(input("What name should your character have."))
     return p
+
+#okay
