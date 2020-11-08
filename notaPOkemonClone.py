@@ -61,25 +61,24 @@ class AI(player):
     def randomMove(self):
         list1 = list(self.moves.keys())
         return list1[random.randint(0,1)]
-    
-
+    def specialMoveSet(self,special):
+        self.special = special
+        pass
+    def getSpeicalMove(self):
+        return
 def battleSetUp():
+    AI = []
     player = playerSetUp()
-    ai = aiSetup("Francis")
-    print(ai.name +" challenges you to a fight.")
-    battle(player,ai,1)
-    player.healthSet(50)
-    ai2 = aiSetup("Ishaan")
-    print(ai2.name +" challenges you to a fight.")
-    battle(player,ai2,1)
-    player.healthSet(50)
-    ai3 = aiSetup("Reynel")
-    print(ai3.name +" challenges you to a fight.")
-    battle(player,ai3,1)
-    player.healthSet(50)
-    ai4 = aiSetup("Defrim")
-    print(ai4.name +" challenges you to a fight.")
-    battle(player,ai4,1)
+    names=["Francis","Ishaan","Reynel", "Defrim"]
+    wins = 0
+    for i in range (len(names)):
+        AI.append(aiSetup(names[i]))
+        print(AI[i].name +" challenges you to a fight.")
+        wins = battle(player,AI[i],1,wins)
+        player.healthSet(50)
+    losses = len(names) - wins
+    print("Victories: "+ str(wins) + " Losses: "+ str(losses) )
+
 def playerSetUp():
     p = player()
     p._init_()
@@ -158,7 +157,7 @@ def Choose_Moves():
     
     return player_chosen_moves
 
-def battle(player, ai,turn):
+def battle(player, ai,turn,wins):
     if ai.health >0 and player.health >0:
         loop = True
         while loop == True:
@@ -169,20 +168,20 @@ def battle(player, ai,turn):
             choice = int(input("Which move do you want to use?\n[1] "+player.getMove1Name() + "    [2] "+player.getMove2Name() + "\n"))
             if choice == 1:
                 loop = False
-                attackStep(player,ai,player.getMove1Name(),turn)
+                wins = attackStep(player,ai,player.getMove1Name(),turn,wins)
             elif choice == 2:
                 loop = False
-                attackStep(player,ai,player.getMove2Name(),turn)
+                wins = attackStep(player,ai,player.getMove2Name(),turn,wins)
             else:
                 print("1 and 2 are the only valid inputs.")
 
-    pass
-def attackStep(player,ai,move,turn):
+    return wins
+def attackStep(player,ai,move,turn,wins):
     aimove = ai.randomMove()
     if player.getSpd() > ai.getSpd():
         ai = accCheck(player,ai,move)
         if ai.getHealth() <= 0:
-            victory(player)
+           wins = victory(player,wins)
         else:
             player = accCheck(ai,player,move =aimove)
             if player.getHealth() <= 0:
@@ -194,10 +193,10 @@ def attackStep(player,ai,move,turn):
         else:
             ai = accCheck(player,ai,move)
             if ai.getHealth() <= 0:
-                victory(player)
+                wins= victory(player,wins)
     turn += 1
-    battle(player,ai,turn)
-
+    wins =battle(player,ai,turn,wins)
+    return wins
 def damageCalc(player,move):
     damage = player.getAttack() * player.MoveSelect(move)
     return round(damage)
@@ -210,12 +209,13 @@ def accCheck(player,ai,move):
     else: 
         print("\n"+player.getName()+ " uses "+ move+ " but it missed." )
     return ai
-def victory(player):
+def victory(player,wins):
     print(player.getName() + " wins the fight.")
-
+    wins += 1
+    return wins
 def defeat(ai):
     print(ai.getName() + " wins the fight.")
-    print("GAME OVER")
+    pass
 if __name__ == "__main__":
     battleSetUp()
     
