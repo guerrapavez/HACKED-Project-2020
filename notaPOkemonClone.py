@@ -39,4 +39,10 @@ if __name__ == "__main__":
     
     pass
 def battleSetUp():
-    choice = 
+    choice = input("[1]Player vs Player          [2]Player vs Computer")
+    if choice == "1":
+        choice = input("")
+        player1 = playerSetUp()
+    
+def playerSetUp():
+    
