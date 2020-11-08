@@ -36,7 +36,9 @@ class player ():
     def setSpd(self,speed):
         self.speed = speed
     def MoveSelect(self,move):
-        return self.moves[move] 
+        return self.moves[move][0]
+    def AccuracySelect(self, move):
+        return self.moves[move][1] 
     def setMoves(self, moves):
         self.moves = moves
     def setAttack(self, attack):
@@ -95,49 +97,50 @@ def aiSetup(name):
         ai.healthSet(80)
         ai.setAttack(0.7)
         ai.setSpd(0.7)
-        moves = {"WOAH WOAH WOAH": 14, 
-        "I'm actually done dud": 8}
+        moves = {"WOAH WOAH WOAH": [14,.55], 
+        "I'm actually done dud": [8,.75]}
         ai.setMoves(moves)
     elif ai.name == "Reynel":
         ai.healthSet(30)
         ai.setAttack(1.8)
         ai.setSpd(1.2)
-        moves = {"Chancla Throw": 9, 
-        "Tight Hug": 7}
+        moves = {"Chancla Throw": [9,.86], 
+        "Tight Hug": [7,.92]}
         ai.setMoves(moves)
     elif ai.name == "Francis":
         ai.healthSet(40)
         ai.setAttack(0.8)
         ai.setSpd(2.2)
-        moves = {"Salmonela": 14,
-        "Monster Energy": 10}
+        moves = {"Salmonela": [14,.50],
+        "Monster Energy": [10,0.70]}
         ai.setMoves(moves)
     elif ai.name == "Ishaan":
         ai.healthSet(50)
         ai.setAttack(1.2)
         ai.setSpd(1.8)
-        moves ={"SquadW": 4,
-        "Microsoft Paint": 6 }
+        moves ={"SquadW": [4,1.00],
+        "Microsoft Paint": [6,1.00]}
         ai.setMoves(moves)
     return ai
 
 
 def Choose_Moves():
-    Preset_Moves = {"Hyper Beam" : 15,
-    "Fire Blast" : 11,
-    "Earthquake" : 10,
-    "Leaf Storm" : 13,
-    "Thunder Bolt" : 9,
-    "Close Combat" : 12,
-    "Psychic" : 9,
-    "Blizzard": 11,
-    "Bullet punch" : 4,
-    "Tackle" : 4,
-    "Hidden Power" : 6,
-    "Night Slash" : 7,
-    "Aerial Ace" : 6,
-    } 
+    Preset_Moves = {"Hyper Beam" : [15, 0.40],
+    "Fire Blast" : [11,.70],
+    "Earthquake" : [10 , .70],
+    "Leaf Storm" : [13, .60],
+    "Thunder Bolt" : [9, .80],
+    "Close Combat" : [12, .60],
+    "Psychic" : [9,.80],
+    "Blizzard": [11,.65],
+    "Bullet punch" : [4,1.00],
+    "Tackle" : [4, 1.00],
+    "Hidden Power" : [6,.85],
+    "Night Slash" : [7,.80],
+    "Aerial Ace" : [6,.85],
+    }
     
+    print("Moves List: Will be in the form of ===> Move Name : [Damage, Accuracy])")
     print(Preset_Moves)
     Chosen_Moves = []
     
