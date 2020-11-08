@@ -1,4 +1,4 @@
-
+import random
 class player ():
     def _init_(self, name ="", health = 0, speed=0,moves={}):
         self.name = name
@@ -43,9 +43,14 @@ class player ():
         self.attack = attack
     def getAttack(self):
         return self.attack
-
+    def getMoves(self):
+        return self.moves
+    def getMove1Name(self):
+        return self.moves.keys()[0]
+    def getMove2Name(self):
+        return self.moves.keys()[1]
     pass
-class ai(player):
+class AI(player):
     def nameManualSet(self, name):
         self.name = name
     pass
@@ -63,52 +68,87 @@ def playerSetUp():
     p.nameSet()
     return p
 def aiSetup():
-    ai = ai()
+    ai = AI()
     names = ["Defrim", "Reynel", "Ishaan", "Francis"]
-    ai.nameManualSet(names[random.randrange(0, 3, 1)])
+    ai.nameManualSet(names[random.randint(0,3)])
     if ai.name == "Defrim":
-        ai.healthSet()
+        ai.healthSet(80)
+        ai.setAttack(0.7)
+        ai.setSpd(0.7)
+        moves = {"WOAH WOAH WOAH": 20, 
+        "I'm actually done dud": 8}
+        ai.setMoves(moves)
+    elif ai.name == "Reynel":
+        ai.healthSet(30)
+        ai.setAttack(1.8)
+        ai.setSpd(1.2)
+        moves = {"Chancla Throw": 9, 
+        "Tight Hug": 7}
+        ai.setMoves(moves)
+    elif ai.name == "Francis":
+        ai.healthSet(40)
+        ai.setAttack(0.8)
+        ai.setSpd(2.2)
+        moves = {"Salmonela": 14,
+        "Monster Energy": 10}
+        ai.setMoves(moves)
+    elif ai.name == "Ishaan":
+        ai.healthSet(50)
+        ai.setAttack(1.2)
+        ai.setSpd(1.8)
+        moves ={"SquadW": 4,
+        "Microsoft Paint": 6 }
+        ai.setMoves(moves)
     return ai
 
 
 def Choose_Moves():
-    Preset_Moves = {"Hyper Beam" : 15,
-    "Fire Blast" : 11,
-    "Earthquake" : 10,
-    "Leaf Storm" : 13,
-    "Thunder Bolt" : 9,
-    "Close Combat" : 12,
-    "Psychic" : 9,
-    "Blizzard": 11,
-    "Bullet punch" : 4,
-    "Tackle" : 4,
-    "Hidden Power" : 6,
-    "Night Slash" : 7,
-    "Aerial Ace" : 6,
+    Preset_Moves = {"Hyper Beam" : 150,
+    "Fire Blast" : 110,
+    "Earthquake" : 100,
+    "Leaf Storm" : 130,
+    "Thunder Bolt" : 90,
+    "Close Combat" : 120,
+    "Psychic" : 90,
+    "Blizzard": 110,
+    "Bullet punch" : 40,
+    "Tackle" : 40,
+    "Hidden Power" : 60,
+    "Night Slash" : 70,
+    "Aerial Ace" : 60,
+    "WOAH WOAH WOAH" : 200
     } 
-    p = player()
+    p = player() 
     p._init_()
     
     print(Preset_Moves)
-    Chosen_Moves = []
-    
-    while not set(Chosen_Moves).intersection(Preset_Moves.keys()):
-        Chosen_Moves.append(str(input("Please choose your first move from the moves list above (CASE SENSITIVE):   ")))
-        Chosen_Moves.append(str(input("Please choose your second and last move for the moves list above (CASE SENSITIVE):   ")))
-    
+    Chosen_Moves = list(map(str,input("Please choose 2 moves from this list").split()))
     player_chosen_moves = {}
+
+
     for x in Chosen_Moves: 
         if x in Preset_Moves:
             player_chosen_moves[x] = Preset_Moves[x]
     
     p.setMoves(player_chosen_moves)
+    print(p.moves)
 if __name__ == "__main__":
     Choose_Moves()
     
-def battle(player1, player2):
-
-    if player1.getSpd() > player2.getSpd()
-        print("Player 1 is f"
-
+def battle(player, ai):
+    print(ai.name +" challenges you to a fight.")
+    while ai.health >0 and player.health >0:
+        choice = 0
+        choice == int(input("Which move do you want to use?\n[1] "+player.getMove1Name + "    [2] "+player.getMove2Name))
+        if choice == 1:
+            print()
     pass
-#okay
+def attackStep(player,ai,move):
+    if player.getSpd() > ai.getSpd():
+        damage = damageCalc(player,move)
+        print(player.getName()+ " uses "+ move)
+    else:
+        print()
+def damageCalc(player,move):
+    damage = player.getAttack * player.MoveSelect(move)
+    return damage
