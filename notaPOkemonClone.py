@@ -123,6 +123,14 @@ def aiSetup(name):
 
 
 def Choose_Moves():
+    print("You are in Cameron Library, studying for a big test. but then all of a sudden,\n")
+    for i in range(5):
+        print(".\n")
+    print("POW\n")
+    print("You have been challenged by UofA's Elite Four\n")
+    print("Quickly!! Choose two moves to fight!!!\n")
+
+    
     Preset_Moves = {"Hyper Beam" : [15, 0.40],
     "Fire Blast" : [11,.70],
     "Earthquake" : [10 , .70],
@@ -138,13 +146,19 @@ def Choose_Moves():
     "Aerial Ace" : [6,.85],
     }
     
-    print("Moves List: Will be in the form of ===> Move Name : [Damage, Accuracy])")
-    print(Preset_Moves)
+    Move_names = list(Preset_Moves.keys())
+    move_stats = list(Preset_Moves.values())
+
+    print("Moves List: ")
+    for i in range(len(Preset_Moves.keys())):
+        print("{0} - Damage: {1} and Accuracy: {2}% ".format(Move_names[i],move_stats[i][0], move_stats[i][1]*100 ))
+
+
     Chosen_Moves = []
     
     while not set(Chosen_Moves).intersection(Preset_Moves.keys()):
-        Chosen_Moves.append(str(input("Please choose your first move from the moves list above (CASE SENSITIVE):   ")))
-        Chosen_Moves.append(str(input("Please choose your second and last move for the moves list above (CASE SENSITIVE):   ")))
+        Chosen_Moves.append(str(input("Please choose your first move from the moves list above, just the name. (CASE SENSITIVE):   ")))
+        Chosen_Moves.append(str(input("Please choose your second and last move for the moves list above, just the name. (CASE SENSITIVE):   ")))
         if Chosen_Moves[0] not in Preset_Moves.keys() or Chosen_Moves[1] not in Preset_Moves.keys():
             Chosen_Moves = []
     
