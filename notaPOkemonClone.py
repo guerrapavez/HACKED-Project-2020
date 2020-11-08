@@ -36,5 +36,7 @@ class player ():
         self.speed = speed
 
 if __name__ == "__main__":
-    player1 = player()
+    
     pass
+def battleSetUp():
+    choice = 
